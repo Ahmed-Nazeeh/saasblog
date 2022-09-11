@@ -50,3 +50,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "faker", "~> 2.23"
 
 gem "devise", "~> 4.8"
+
+gem "stripe", "~> 7.1"
