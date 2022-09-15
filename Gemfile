@@ -52,3 +52,4 @@ gem "faker", "~> 2.23"
 gem "devise", "~> 4.8"
 
 gem "stripe", "~> 7.1"
+
