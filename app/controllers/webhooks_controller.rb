@@ -8,9 +8,7 @@ class WebhooksController < ApplicationController
         event = nil
 
         begin
-            event = Stripe::Webhook.construct_event(
-            payload, sig_header, Rails.application.credentials.dig(:stripe, :webhook)
-            )
+            event = Stripe::Webhook.construct_event(payload, sig_header, Rails.env.production? ? ENV['STRIPE_WEBHOOK'] : Rails.application.credentials.dig(:stripe, :webhook))
         rescue JSON::ParserError => e
             # Invalid payload
             status 400
@@ -32,8 +30,7 @@ class WebhooksController < ApplicationController
             @user = User.find_by(stripe_customer_id: subscription.customer)
             @user.update(
                 subscription_status: subscription.status,
-                plan: subscription.items.data[0].price.lookup_key,
-            )
+                plan: subscription.items.data[0].price.lookup_key)
         end
         render json: { message: 'success' }
     end
