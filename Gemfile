@@ -53,3 +53,7 @@ gem "devise", "~> 4.8"
 
 gem "stripe", "~> 7.1"
 
+group :production do
+  gem 'pg'
+  # gem 'rails_12factor'
+end
